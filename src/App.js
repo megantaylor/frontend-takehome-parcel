@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import Form from './components/Form';
+import List from './components/List';
 
 class App extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ class App extends React.Component {
         }`
       )
       .then(resp => {
+        console.log('result', resp.data[0]);
         this.setState({
           loading: false,
           results: resp.data
@@ -46,6 +48,7 @@ class App extends React.Component {
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
+        {!this.state.loading ? <List results={this.state.results} /> : null}
       </div>
     );
   }
