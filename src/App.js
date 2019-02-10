@@ -42,7 +42,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className='App'>
+      <div className='app'>
         <Form
           searchTerm={this.state.searchTerm}
           handleSubmit={this.handleSubmit}

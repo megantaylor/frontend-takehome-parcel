@@ -4,13 +4,16 @@ export default function Form(props) {
   return (
     <form onSubmit={e => props.handleSubmit(e)}>
       <input
+        className='searchInput'
         type='text'
         onChange={props.handleChange}
         value={props.searchTerm}
         placeholder='Search for a Ruby Gem'
         required
       />
-      <button type='submit'>Search</button>
+      <button className='searchSubmit' type='submit'>
+        Search
+      </button>
     </form>
   );
 }
