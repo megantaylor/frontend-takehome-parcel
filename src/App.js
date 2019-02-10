@@ -10,11 +10,20 @@ class App extends React.Component {
     this.state = {
       searchTerm: '',
       loading: false,
-      results: []
+      results: [],
+      savedGems: []
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    if (!localStorage.savedGems) {
+      localStorage.setItem('savedGems', []);
+    } else {
+      this.setState({
+        savedGems: [...JSON.parse(localStorage.savedGems)]
+      });
+    }
+  }
 
   handleChange = event => {
     this.setState({ searchTerm: event.target.value });
@@ -32,12 +41,23 @@ class App extends React.Component {
         }`
       )
       .then(resp => {
-        console.log('result', resp.data[0]);
         this.setState({
           loading: false,
           results: resp.data
         });
       });
+  };
+
+  handleGemButton = item => {
+    let gems = [...this.state.savedGems, item];
+    if (localStorage.savedGems.length < 1) {
+      localStorage.setItem('savedGems', [JSON.stringify(gems)]);
+    } else {
+      localStorage.setItem('savedGems', [JSON.stringify(gems)]);
+    }
+    this.setState({
+      savedGems: gems
+    });
   };
 
   render() {
@@ -48,7 +68,12 @@ class App extends React.Component {
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
-        {!this.state.loading ? <List results={this.state.results} /> : null}
+        {!this.state.loading ? (
+          <List
+            results={this.state.results}
+            handleGemButton={this.handleGemButton}
+          />
+        ) : null}
       </div>
     );
   }

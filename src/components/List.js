@@ -10,7 +10,11 @@ export default function List(props) {
               {item.name}
               <span>{item.version}</span>
             </h2>
-            <button className='gemButton' type='button'>
+            <button
+              className='gemButton'
+              onClick={() => props.handleGemButton(item)}
+              type='button'
+            >
               Save
             </button>
           </div>
