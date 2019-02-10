@@ -115,6 +115,7 @@ class App extends React.Component {
             savedGems={this.state.savedGems}
             handleGemButton={this.handleGemButton}
             findWithAttr={this.findWithAttr}
+            whichList={this.state.whichList}
           />
         ) : null}
         {!this.state.loading && this.state.whichList === 'searchResults' ? (
@@ -123,6 +124,7 @@ class App extends React.Component {
             savedGems={this.state.savedGems}
             handleGemButton={this.handleGemButton}
             findWithAttr={this.findWithAttr}
+            whichList={this.state.whichList}
           />
         ) : null}
       </div>
