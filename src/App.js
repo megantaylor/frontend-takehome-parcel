@@ -54,14 +54,10 @@ class App extends React.Component {
   parseData = results => {
     let data = [];
     results.forEach(result => {
-      let saved = this.state.savedGems.some(function(obj) {
-        return obj.name === result.name;
-      });
       let item = {
         name: result.name,
         version: result.version,
-        info: result.info,
-        saved: saved
+        info: result.info
       };
       data.push(item);
     });
@@ -69,12 +65,14 @@ class App extends React.Component {
   };
 
   handleGemButton = item => {
-    let gems = [...this.state.savedGems, item];
-    if (localStorage.savedGems.length < 1) {
-      localStorage.setItem('savedGems', [JSON.stringify(gems)]);
+    let gems, index;
+    if (this.state.savedGems.indexOf(item.name) === -1) {
+      gems = [...this.state.savedGems, item.name];
     } else {
-      localStorage.setItem('savedGems', [JSON.stringify(gems)]);
+      index = this.state.savedGems.indexOf(item.name);
+      gems = this.state.savedGems.filter(e => e !== item.name);
     }
+    localStorage.setItem('savedGems', [JSON.stringify(gems)]);
     this.setState({
       savedGems: gems
     });
@@ -91,6 +89,7 @@ class App extends React.Component {
         {!this.state.loading ? (
           <List
             results={this.state.results}
+            savedGems={this.state.savedGems}
             handleGemButton={this.handleGemButton}
           />
         ) : null}
