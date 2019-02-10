@@ -11,7 +11,8 @@ class App extends React.Component {
       searchTerm: '',
       loading: false,
       results: [],
-      savedGems: []
+      savedGems: [],
+      whichList: null
     };
   }
 
@@ -20,10 +21,32 @@ class App extends React.Component {
       localStorage.setItem('savedGems', []);
     } else {
       this.setState({
-        savedGems: [...JSON.parse(localStorage.savedGems)]
+        savedGems: JSON.parse(localStorage.savedGems)
       });
     }
   }
+
+  findWithAttr = (array, attr, value) => {
+    for (var i = 0; i < array.length; i += 1) {
+      if (array[i][attr] === value) {
+        return i;
+      }
+    }
+    return -1;
+  };
+
+  parseData = results => {
+    let data = [];
+    results.forEach(result => {
+      let item = {
+        name: result.name,
+        version: result.version,
+        info: result.info
+      };
+      data.push(item);
+    });
+    return data;
+  };
 
   handleChange = event => {
     this.setState({ searchTerm: event.target.value });
@@ -46,35 +69,28 @@ class App extends React.Component {
       .then(data => {
         this.setState({
           loading: false,
-          results: data
+          results: data,
+          whichList: 'searchResults'
         });
       });
   };
 
-  parseData = results => {
-    let data = [];
-    results.forEach(result => {
-      let item = {
-        name: result.name,
-        version: result.version,
-        info: result.info
-      };
-      data.push(item);
-    });
-    return data;
-  };
-
   handleGemButton = item => {
-    let gems, index;
-    if (this.state.savedGems.indexOf(item.name) === -1) {
-      gems = [...this.state.savedGems, item.name];
+    let gems;
+    if (this.findWithAttr(this.state.savedGems, 'name', item.name) === -1) {
+      gems = [...this.state.savedGems, item];
     } else {
-      index = this.state.savedGems.indexOf(item.name);
-      gems = this.state.savedGems.filter(e => e !== item.name);
+      gems = this.state.savedGems.filter(e => e.name !== item.name);
     }
     localStorage.setItem('savedGems', [JSON.stringify(gems)]);
     this.setState({
       savedGems: gems
+    });
+  };
+
+  handleViewSavedGems = () => {
+    this.setState({
+      whichList: 'savedGems'
     });
   };
 
@@ -86,11 +102,27 @@ class App extends React.Component {
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
         />
-        {!this.state.loading ? (
+        <button
+          className='viewSavedGems'
+          onClick={() => this.handleViewSavedGems()}
+          type='button'
+        >
+          Or view saved Gems ({this.state.savedGems.length})
+        </button>
+        {!this.state.loading && this.state.whichList === 'savedGems' ? (
+          <List
+            results={this.state.savedGems}
+            savedGems={this.state.savedGems}
+            handleGemButton={this.handleGemButton}
+            findWithAttr={this.findWithAttr}
+          />
+        ) : null}
+        {!this.state.loading && this.state.whichList === 'searchResults' ? (
           <List
             results={this.state.results}
             savedGems={this.state.savedGems}
             handleGemButton={this.handleGemButton}
+            findWithAttr={this.findWithAttr}
           />
         ) : null}
       </div>

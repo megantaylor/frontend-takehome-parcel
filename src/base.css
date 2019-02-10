@@ -11,15 +11,15 @@ h1 {
   text-align: center;
 }
 
-.app {
+/* .app {
   display: flex;
   flex-direction: column;
-}
+} */
 
 form {
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
 }
 
 .searchInput {
@@ -38,13 +38,39 @@ form {
 .searchSubmit {
   position: relative;
   left: -6px;
-  border: 1px solid #96312e;
+  border: 3px solid #96312e;
   background: #96312e;
   text-align: center;
   color: #fff;
-  border-radius: 5px;
+  border-radius: 0 5px 5px 0;
   cursor: pointer;
   font-size: 18px;
+}
+
+.searchSubmit:hover {
+  background: #fff;
+  color: #96312e;
+}
+
+.viewSavedGems {
+  color: #96312e;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+  background: transparent;
+  outline: none;
+  display: block;
+  margin: 0 auto;
+}
+
+.viewSavedGems:hover {
+  color: #d1675a;
+  text-decoration: underline;
+}
+
+.searchResults {
+  margin-top: 50px;
 }
 
 .searchResults > div {

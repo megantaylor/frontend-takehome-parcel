@@ -15,7 +15,9 @@ export default function List(props) {
               onClick={() => props.handleGemButton(item)}
               type='button'
             >
-              {props.savedGems.indexOf(item.name) > -1 ? 'Unsave' : 'Save'}
+              {props.findWithAttr(props.savedGems, 'name', item.name) > -1
+                ? 'Unsave'
+                : 'Save'}
             </button>
           </div>
           <p>{item.info}</p>
