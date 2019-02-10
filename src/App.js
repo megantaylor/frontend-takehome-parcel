@@ -41,11 +41,31 @@ class App extends React.Component {
         }`
       )
       .then(resp => {
+        return this.parseData(resp.data);
+      })
+      .then(data => {
         this.setState({
           loading: false,
-          results: resp.data
+          results: data
         });
       });
+  };
+
+  parseData = results => {
+    let data = [];
+    results.forEach(result => {
+      let saved = this.state.savedGems.some(function(obj) {
+        return obj.name === result.name;
+      });
+      let item = {
+        name: result.name,
+        version: result.version,
+        info: result.info,
+        saved: saved
+      };
+      data.push(item);
+    });
+    return data;
   };
 
   handleGemButton = item => {

@@ -15,7 +15,7 @@ export default function List(props) {
               onClick={() => props.handleGemButton(item)}
               type='button'
             >
-              Save
+              {item.saved ? 'Unsave' : 'Save'}
             </button>
           </div>
           <p>{item.info}</p>
