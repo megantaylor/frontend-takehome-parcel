@@ -26,6 +26,7 @@ class App extends React.Component {
     }
   }
 
+  //find the index of an object with a specific key:value pair in an array of objects
   findWithAttr = (array, attr, value) => {
     for (var i = 0; i < array.length; i += 1) {
       if (array[i][attr] === value) {
@@ -35,6 +36,7 @@ class App extends React.Component {
     return -1;
   };
 
+  //reduce large response object to just required data
   parseData = results => {
     let data = [];
     results.forEach(result => {
@@ -63,6 +65,7 @@ class App extends React.Component {
           this.state.searchTerm
         }`
       )
+
       .then(resp => {
         return this.parseData(resp.data);
       })
@@ -72,9 +75,13 @@ class App extends React.Component {
           results: data,
           whichList: 'searchResults'
         });
+      })
+      .catch(error => {
+        console.log('error', error);
       });
   };
 
+  //check if an item is in savedGems. if so, remove it, otherwise, add it
   handleGemButton = item => {
     let gems;
     if (this.findWithAttr(this.state.savedGems, 'name', item.name) === -1) {
@@ -88,6 +95,7 @@ class App extends React.Component {
     });
   };
 
+  //use whichList state variable to control whether searchResults or savedGems list is displayed
   handleViewSavedGems = () => {
     this.setState({
       whichList: 'savedGems'

@@ -1,3 +1,15 @@
+# Submission Notes
+
+I ran out of time to do a few things:
+
+- refactor List component to better support search results vs saved gems, likely breaking it down further with a ListItems component
+- fetching more than first 30 results using page query parameter
+- pagination for full results list
+- add tests
+- add a loading indicator
+- css on component-level rather than global
+- user-facing error messages
+
 # Teachable frontend takehome
 
 If you're reading this, you're likely a candidate for a frontend job at Teachable. You're going to be building a search application that takes a user's search query, hits the [Ruby Gems](https://rubygems.org/) search API endpoint, and displays the results in a list view with some added functionality (detailed below).

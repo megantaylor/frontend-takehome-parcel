@@ -6,15 +6,9 @@ body {
 }
 
 h1 {
-  font-size: 50px;
   font-weight: 300;
   text-align: center;
 }
-
-/* .app {
-  display: flex;
-  flex-direction: column;
-} */
 
 form {
   display: flex;
@@ -45,6 +39,7 @@ form {
   border-radius: 0 5px 5px 0;
   cursor: pointer;
   font-size: 18px;
+  outline: none;
 }
 
 .searchSubmit:hover {
@@ -85,11 +80,14 @@ form {
 
 .searchResults h2 {
   color: #96312e;
+  word-break: break-word;
+  margin-right: 20px;
 }
 .searchResults span {
   color: #000;
   font-size: 12px;
   margin-left: 15px;
+  word-break: initial;
 }
 
 .searchResults .gemButton {
@@ -100,6 +98,8 @@ form {
   cursor: pointer;
   font-size: 16px;
   height: 30px;
+  background: transparent;
+  outline: none;
 }
 
 .searchResults .gemButton:hover {
@@ -109,4 +109,10 @@ form {
 
 .searchResults p {
   line-height: 1.4;
+  font-size: 14px;
+}
+
+.noResults {
+  text-align: center;
+  font-size: 14px;
 }

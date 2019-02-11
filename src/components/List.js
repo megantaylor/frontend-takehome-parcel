@@ -22,7 +22,7 @@ export default function List(props) {
     </div>
   ));
 
-  const noResults = <p>No search results found.</p>;
+  const noResults = <p className='noResults'>No search results found.</p>;
 
   return (
     <div className='searchResults'>
