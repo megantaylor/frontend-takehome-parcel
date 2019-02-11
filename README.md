@@ -9,6 +9,7 @@ I ran out of time to do a few things:
 - add a loading indicator
 - css on component-level rather than global
 - user-facing error messages
+- better empty state ui, headers for search results vs saved gems
 
 # Teachable frontend takehome
 
